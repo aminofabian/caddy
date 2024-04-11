@@ -1,0 +1,6 @@
+
+
+dev.fitrii.com {
+	reverse_proxy frontend_dev:3000
+}
+
