@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  caddy_reverse_proxy:
+    image: caddy:latest
+    restart: unless-stopped
+    container_name: caddy_prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - CADDY_DNS=custom
+      - CADDY_DNS_CUSTOM_PLUGIN=github.com/caddy-dns/vultr
+      - CADDY_DNS_CUSTOM_API_TOKEN=TDJFRNR2EQK55O3PMAHNVNYHB4THCS3FDNCQ
+    networks:
+      - caddy_network
+networks:
+  caddy_network:
+    name: caddy_network
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
+   
+
+
+   
